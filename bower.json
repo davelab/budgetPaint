@@ -1,0 +1,25 @@
+{
+  "name": "budgetPaint",
+  "version": "0.0.0",
+  "authors": [
+    "Davide Cariani <davidecariani7@gmail.com>"
+  ],
+  "description": "a HTML5 drawing app",
+  "keywords": [
+    "html5",
+    "javascript",
+    "drawing",
+    "draw",
+    "canvas"
+  ],
+  "license": "MIT",
+  "homepage": "davelab.net",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
