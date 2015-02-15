@@ -39,6 +39,7 @@ var Painter = (function($){
   ui.colorPalette.css({'background-color' : defaultStyle.strokeStyle});
   ui.colorpicker.minicolors({
     inline: true,
+    defaultValue: defaultStyle.strokeStyle,
     change: function(hex, opacity) {
       if (hex) {
         ui.colorPalette.css({'background-color' : hex});
