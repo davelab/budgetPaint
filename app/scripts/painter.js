@@ -8,16 +8,18 @@ var Painter = (function($){
       segment         = -1,
       last_mouse      = {x: 0, y: 0},
       ui = {
-              colorpicker     : $('#colorpicker-container > span'),
-              slider          : $('#slider'),
-              sliderStrokeVal : $('.slider-value'),
-              toolsPalette    : $('#palette'),
-              paletteHandle   : $('#palette-handle'),
-              strokePalette   : $('#stroke-palette'),
-              colorPalette    : $('#color-palette'),
-              clearPalette    : $('#clear'),
-              undoPalette     : $('#undo'),
-              redoPalette     : $('#redo'),
+              colorpicker          : $('#colorpicker-container > span'),
+              colorpickerContainer : $('#colorpicker-container'),
+              slider               : $('#slider'),
+              sliderContainer      : $('#stroke-slider-container'),
+              sliderStrokeVal      : $('.slider-value'),
+              toolsPalette         : $('#palette'),
+              paletteHandle        : $('#palette-handle'),
+              strokePalette        : $('#stroke-palette'),
+              colorPalette         : $('#color-palette'),
+              clearPalette         : $('#clear'),
+              undoPalette          : $('#undo'),
+              redoPalette          : $('#redo'),
       },
       defaultStyle = {
         strokeWidth : 5,
@@ -37,6 +39,7 @@ var Painter = (function($){
   });
 
   ui.colorPalette.css({'background-color' : defaultStyle.strokeStyle});
+
   ui.colorpicker.minicolors({
     inline: true,
     defaultValue: defaultStyle.strokeStyle,
@@ -72,6 +75,16 @@ var Painter = (function($){
   ui.redoPalette.on('click', function(e) {
     redo();
   });
+
+  ui.strokePalette.on('click', function(e) {
+    showControl(ui.sliderContainer, e);
+  });
+
+  ui.colorPalette.on('click', function(e) {
+    showControl(ui.colorpickerContainer, e);
+  });
+
+
   canvas.addEventListener('mousemove', function(e) {
 
     last_mouse.x = mouse.x;
@@ -91,6 +104,16 @@ var Painter = (function($){
       canvas.removeEventListener('mousemove', onPaint, false);
       createSnapshot();
   }, false);
+
+  var _getViewport = function () {
+    var m = document.compatMode == 'CSS1Compat';
+    return {
+      l : window.pageXOffset || (m ? document.documentElement.scrollLeft : document.body.scrollLeft),
+      t : window.pageYOffset || (m ? document.documentElement.scrollTop : document.body.scrollTop),
+      w : window.innerWidth || (m ? document.documentElement.clientWidth : document.body.clientWidth),
+      h : window.innerHeight || (m ? document.documentElement.clientHeight : document.body.clientHeight)
+    };
+  }
 
   var onPaint = function() {
       ctx.beginPath();
@@ -117,7 +140,7 @@ var Painter = (function($){
     clearCanvas();
     snapshots = [];
     segment = -1;
-  }
+  };
 
   var createSnapshot = function() {
     segment++;
@@ -133,7 +156,7 @@ var Painter = (function($){
         clearCanvas();
         ctx.drawImage(snapshot, 0, 0);
       }
-  }
+  };
 
   var redo = function() {
     if (segment < snapshots.length-1) {
@@ -142,7 +165,28 @@ var Painter = (function($){
         snapshot.src = snapshots[segment];
         snapshot.onload = function () { ctx.drawImage(snapshot, 0, 0); }
     }
-  }
+  };
+
+  var showControl = function(el, ev) {
+    if (!el.hasClass('active')) {
+      var viewPort      = _getViewport(),
+          elWidth       = el.width(),
+          left          = ui.toolsPalette.offset().left,
+          width         = ui.toolsPalette.width();
+          space         = 60;
+          leftDistance  = viewPort.w - left - width - space;
+
+      if ( leftDistance >= elWidth ) {
+        el.removeClass('left').addClass('right');
+      } else {
+        el.removeClass('right').addClass('left');
+      }
+    }
+
+    el.on('click', function (e) {
+      e.stopImmediatePropagation();
+    }).toggleClass('active');
+  };
 
   Init();
 

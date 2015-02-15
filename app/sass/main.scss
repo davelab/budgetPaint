@@ -100,28 +100,40 @@ body {
   cursor: default;
   @include box-shadow(0px 3px 3px 0px rgba(50, 50, 50, 0.4));
   @include border-radius(3px);
-  @include transition-property(opacity);
-  @include transition-duration(0.5s);
+  visibility: hidden;
+  opacity:0;
+  @include transition(visibility 0s linear 0.25s, opacity 0.25s linear);
+  &.active {
+    visibility: visible;
+    opacity: 1;
+    @include transition-delay(0s);
+  }
 }
 
-.stroke-slider-container {
+#stroke-slider-container {
   height: 10px;
   padding: 12px 10px 5px;
   width: 150px;
-  left: -200px;
-  opacity: 1;
-  &.active {
-    opacity: 1;
+  &.right {
+    left: 60px;
+  }
+  &.left {
+    right: 60px;
   }
 }
 
 #colorpicker-container {
   width: 200px;
-  left: -200px;
   padding: 10px 0;
   .minicolors-panel {
     background: transparent;
     border: none
+  }
+  &.right {
+    left: 80px;
+  }
+  &.left {
+    right: 80px;
   }
 }
 
