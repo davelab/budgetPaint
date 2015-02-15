@@ -2,6 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <title>BudgetPaint</title>
+  <link rel="stylesheet" href="components/nouislider/src/jquery.nouislider.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -10,9 +11,36 @@
 </div>
 <div id="palette">
   <div class="draggable-el"></div>
+  <div class="tools" id="stroke">
+  <div class="slider-value"><span></span></div>
+    <div class="tools-container stroke-slider-container">
+      <div id="slider"></div>
+    </div>
+  </div>
+  <div class="tools" id="color-selector">
+    <div class="tools-container" id="colorpicker-container"><span></span></div>
+  </div>
+  <div class="tools" id="undo"></div>
+  <div class="tools" id="redo"></div>
+  <div class="tools" id="clear"></div>
 </div>
 
 <script type="text/javascript" src="components/jquery/dist/jquery.js"></script>
+<script src="components/jquery-ui/ui/core.js"></script>
+<script src="components/jquery-ui/ui/widget.js"></script>
+<script src="components/jquery-ui/ui/mouse.js"></script>
+<script src="components/jquery-ui/ui/position.js"></script>
+<script src="components/jquery-ui/ui/draggable.js"></script>
+<script src="components/nouislider/distribute/jquery.nouislider.all.js"></script>
+<script src="components/jquery-minicolors/jquery.minicolors.js"></script>
 <script type="text/javascript" src="scripts/painter.js"></script>
+
+<script type="text/javascript">
+  $(function(){
+    $('#palette').draggable({
+      handle: '.draggable-el'
+    });
+  });
+</script>
 </body>
 </html>
