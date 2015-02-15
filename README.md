@@ -1,5 +1,7 @@
 # BudgetPaint	
 
+With this app you can draw on html canvas. You can choose every colours you love, the stroke width.
+
 To start this project, run this commands:
 
 <pre>
