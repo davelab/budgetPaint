@@ -2,6 +2,8 @@
 
 With this app you can draw on a full size canvas html canvas. You can choose every colours you love, the stroke width from a draggable tools palette, which allow you to draw on every single pixel of the canvas.
 
+![screen](/app/images/screenshot.png)
+
 Dependencies:
 node,
 grunt,
