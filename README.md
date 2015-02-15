@@ -1,8 +1,13 @@
 # BudgetPaint	
 
-With this app you can draw on html canvas. You can choose every colours you love, the stroke width.
+With this app you can draw on a full size canvas html canvas. You can choose every colours you love, the stroke width from a draggable tools palette, which allow you to draw on every single pixel of the canvas.
 
-To start this project, run this commands:
+Dependencies:
+node,
+grunt,
+bower.
+
+for run this project type on your terminal:
 
 <pre>
 > npm install && bower install
