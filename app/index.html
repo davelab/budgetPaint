@@ -2,10 +2,14 @@
 <head>
   <meta charset="UTF-8">
   <title>BudgetPaint</title>
+  <!-- build:css css/style.css -->
   <link rel="stylesheet" href="components/nouislider/src/jquery.nouislider.css">
+  <link rel="stylesheet" href="components/jquery-minicolors/jquery.minicolors.css">
   <link rel="stylesheet" href="css/style.css">
+  <!-- endbuild -->
 </head>
 <body>
+
 <div class="canvas-container">
   <canvas id="paint"></canvas>
 </div>
@@ -24,7 +28,7 @@
   <div class="tools" id="redo"></div>
   <div class="tools" id="clear"></div>
 </div>
-
+<!-- build:js js/app.js -->
 <script src="components/jquery/dist/jquery.js"></script>
 <script src="components/jquery-ui/ui/core.js"></script>
 <script src="components/jquery-ui/ui/widget.js"></script>
@@ -33,7 +37,7 @@
 <script src="components/jquery-ui/ui/draggable.js"></script>
 <script src="components/nouislider/distribute/jquery.nouislider.all.js"></script>
 <script src="components/jquery-minicolors/jquery.minicolors.js"></script>
-<script type="text/javascript" src="scripts/painter.js"></script>
-
+<script src="scripts/painter.js"></script>
+<!-- endbuild -->
 </body>
 </html>
