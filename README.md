@@ -11,6 +11,9 @@ features:
  - redo action
  - clear canvas action
 
+### DEMO
+check out the demo: http://davelab.net/budgetPaint/
+
 ![screen](/app/images/screenshot.png)
 
 Dependencies:
