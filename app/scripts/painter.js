@@ -84,9 +84,45 @@ var Painter = (function($){
     showControl(ui.colorpickerContainer, e);
   });
 
+  var onPaintTouch = {
+     isDrawing: false,
+     touchstart: function(coors){
+        ctx.beginPath();
+        ctx.moveTo(coors.x, coors.y);
+        this.isDrawing = true;
+     },
+     touchmove: function(coors){
+        if (this.isDrawing) {
+           ctx.lineTo(coors.x, coors.y);
+           ctx.stroke();
+        }
+     },
+     touchend: function(coors){
+        if (this.isDrawing) {
+           this.touchmove(coors);
+           this.isDrawing = false;
+           createSnapshot();
+        }
+     }
+  };
+
+  var draw = function (e){
+     // get the touch coordinates
+     var coors = {
+        x: e.changedTouches[0].pageX,
+        y: e.changedTouches[0].pageY
+     };
+     // pass the coordinates to the appropriate handler
+     onPaintTouch[e.type](coors);
+  };
+
+  // attach the touchstart, touchmove, touchend event listeners.
+  canvas.addEventListener('touchstart', draw, false);
+  canvas.addEventListener('touchmove', draw, false);
+  canvas.addEventListener('touchend', draw, false);
+
 
   canvas.addEventListener('mousemove', function(e) {
-
     last_mouse.x = mouse.x;
     last_mouse.y = mouse.y;
 
@@ -100,7 +136,7 @@ var Painter = (function($){
       onPaint();
   }, false);
 
-  canvas.addEventListener('mouseup', function() {
+  canvas.addEventListener('mouseup', function(e) {
       canvas.removeEventListener('mousemove', onPaint, false);
       createSnapshot();
   }, false);
